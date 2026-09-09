@@ -4,11 +4,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-- Auth complete; sign-in left panel matches the feature-highlight reference.
+- Auth and project dialogs complete.
 
 ## Current Goal
 
-- Sign-in/sign-up match the 50/50 split, feature icons, copy, and Geist typography.
+- Next feature unit after project dialogs.
 
 ## Completed
 
@@ -26,6 +26,13 @@ Update this file whenever the current phase, active feature, or implementation s
   - `/` redirects authenticated users to `/editor` and unauthenticated users to sign-in.
   - Editor chrome lives at `/editor`; navbar right section uses Clerk `UserButton`.
   - `@clerk/ui` installed; `npm run build` passed.
+- `context/feature-specs/04-project-dialog.md`:
+  - `components/editor/editor-home.tsx` — centered home copy + `New Project` (Plus) opens Create dialog; no cards.
+  - `hooks/use-project-dialogs.ts` — dialog, form, and loading state for create/rename/delete.
+  - `components/editor/project-dialogs.tsx` — Create (live slug preview), Rename (prefilled, autofocus, Enter submits), Delete (destructive confirm only).
+  - `components/editor/project-sidebar.tsx` — mock owned/shared lists; rename/delete actions only on owned projects; New Project wired to Create.
+  - Mobile sidebar backdrop scrim (`md:hidden`); tap outside closes sidebar.
+  - `lib/mock-projects.ts`, `lib/slugify.ts`, `types/project.ts` — mock data only; no API/persistence.
 
 ## In Progress
 
@@ -33,11 +40,11 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Next Up
 
-- Next feature unit after auth.
+- Persistence / API for projects.
 
 ## Open Questions
 
-- None. New Project has no click behavior in this unit (dialogs are deferred).
+- None.
 
 ## Architecture Decisions
 
@@ -50,6 +57,7 @@ Update this file whenever the current phase, active feature, or implementation s
 - Dialog styling for app dialogs is applied in `components/editor/editor-dialog.tsx`, not by editing `components/ui/dialog.tsx`.
 - Auth uses Clerk with `proxy.ts` (not `middleware.ts`). Public routes come from Clerk sign-in/sign-up env vars; all other routes are protected by default.
 - Clerk appearance overrides use existing `globals.css` tokens via CSS variables. Colors are not hardcoded in Clerk config.
+- Project dialogs are UI-only in this unit; submits use mock loading/close with no persistence.
 
 ## Session Notes
 
@@ -57,5 +65,5 @@ Update this file whenever the current phase, active feature, or implementation s
 - Added Button, Card, Dialog, Input, Tabs, Textarea, ScrollArea via the CLI.
 - lucide-react is installed.
 - Do not modify generated `components/ui/*` files.
-- Feature spec: `context/feature-specs/03-auth.md`.
+- Feature spec: `context/feature-specs/04-project-dialog.md` (complete).
 - Installed `@clerk/ui` for the Clerk `dark` theme.
