@@ -1,14 +1,17 @@
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-export default function Home() {
-  return (
-    <div
-      className={cn(
-        "flex flex-1 items-center justify-center bg-base text-copy-primary",
-      )}
-    >
-      arc dev
-      <Button>Click me</Button>  
-    </div>
-  );
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
+
+export default async function Home() {
+  const { isAuthenticated } = await auth();
+  const signInUrl = process.env.NEXT_PUBLIC_CLERK_SIGN_IN_URL;
+
+  if (!signInUrl) {
+    throw new Error("NEXT_PUBLIC_CLERK_SIGN_IN_URL is not set");
+  }
+
+  if (isAuthenticated) {
+    redirect("/editor");
+  }
+
+  redirect(signInUrl);
 }
