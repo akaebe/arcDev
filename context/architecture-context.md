@@ -31,6 +31,10 @@
 
 ## Auth and Collaboration Model
 
+- Clerk handles identity. `ClerkProvider` wraps the root layout.
+- Route protection lives in `proxy.ts` (Next.js 16 proxy, not `middleware.ts`).
+- Public routes are the Clerk sign-in and sign-up paths from env vars. All other routes are protected by default.
+- `/` sends authenticated users to `/editor` and unauthenticated users to sign-in.
 - Every project has a single owner (Clerk user ID).
 - Projects can include additional collaborators.
 - Only authenticated users can access protected routes.

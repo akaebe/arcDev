@@ -121,6 +121,10 @@
   --sidebar-accent-foreground: var(--text-primary);
   --sidebar-border: var(--border-default);
   --sidebar-ring: var(--accent-primary);
+
+  --clerk-font-family: var(--font-geist-sans);
+  --clerk-font-family-buttons: var(--font-geist-sans);
+  --clerk-font-family-mono: var(--font-geist-mono);
 }
 
 @layer base {
@@ -133,6 +137,6 @@
   }
 
   body {
-    @apply bg-base text-copy-primary antialiased;
+    @apply bg-base font-sans text-copy-primary antialiased;
   }
 }
